@@ -1,0 +1,458 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 10,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Audio8Loader",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "AUDIO8_MODEL",
+          "links": [
+            1,
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Audio8Loader"
+      },
+      "widgets_values": [
+        "audio8-realistic-int8-all.safetensors",
+        "auto",
+        "auto",
+        "gpu"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Audio8LongSpeech",
+      "pos": [
+        960,
+        60
+      ],
+      "size": [
+        420,
+        560
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "AUDIO8_MODEL",
+          "link": 1
+        },
+        {
+          "name": "voice",
+          "type": "AUDIO8_VOICE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "metrics",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Audio8LongSpeech"
+      },
+      "widgets_values": [
+        "This is a longer voice cloning example. Each section uses the same reference recording, so the speaker stays anchored to the original voice. You can paste an article, a story, or several paragraphs here. The workflow transcribes the reference automatically and generates the new speech in complete sections. The sections are joined into one recording, with a short pause between them. This keeps the model within its context window while allowing the final audio to continue for much longer.",
+        42,
+        "fixed",
+        768,
+        0.8,
+        0.95,
+        50,
+        false,
+        "auto",
+        240,
+        100
+      ]
+    },
+    {
+      "id": 3,
+      "type": "SaveAudioAdvanced",
+      "pos": [
+        1440,
+        60
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveAudioAdvanced"
+      },
+      "widgets_values": [
+        "audio/Audio8",
+        "flac"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "LoadAudio",
+      "pos": [
+        40,
+        330
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            5,
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "reference.wav"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "Audio8Voice",
+      "pos": [
+        540,
+        60
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "AUDIO8_MODEL",
+          "link": 4
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 5
+        },
+        {
+          "name": "transcript",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "transcript"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "voice",
+          "type": "AUDIO8_VOICE",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Audio8Voice"
+      },
+      "widgets_values": [
+        "The exact words spoken in your reference recording."
+      ]
+    },
+    {
+      "id": 6,
+      "type": "PreviewAny",
+      "pos": [
+        1440,
+        350
+      ],
+      "size": [
+        380,
+        260
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 7,
+      "type": "Audio8ASRLoader",
+      "pos": [
+        40,
+        620
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "asr",
+          "type": "AUDIO8_ASR",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Audio8ASRLoader"
+      },
+      "widgets_values": [
+        "whisper-base.safetensors",
+        "auto"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "Audio8Transcribe",
+      "pos": [
+        540,
+        350
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "asr",
+          "type": "AUDIO8_ASR",
+          "link": 7
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "transcript",
+          "type": "STRING",
+          "links": [
+            9,
+            10
+          ]
+        },
+        {
+          "name": "metrics",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Audio8Transcribe"
+      },
+      "widgets_values": [
+        "auto"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "PreviewAny",
+      "pos": [
+        540,
+        590
+      ],
+      "size": [
+        380,
+        200
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "AUDIO8_MODEL"
+    ],
+    [
+      2,
+      5,
+      0,
+      2,
+      1,
+      "AUDIO8_VOICE"
+    ],
+    [
+      3,
+      2,
+      0,
+      3,
+      0,
+      "AUDIO"
+    ],
+    [
+      4,
+      1,
+      0,
+      5,
+      0,
+      "AUDIO8_MODEL"
+    ],
+    [
+      5,
+      4,
+      0,
+      5,
+      1,
+      "AUDIO"
+    ],
+    [
+      6,
+      2,
+      1,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      7,
+      0,
+      8,
+      0,
+      "AUDIO8_ASR"
+    ],
+    [
+      8,
+      4,
+      0,
+      8,
+      1,
+      "AUDIO"
+    ],
+    [
+      9,
+      8,
+      0,
+      5,
+      2,
+      "STRING"
+    ],
+    [
+      10,
+      8,
+      0,
+      9,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [
+        30,
+        30
+      ]
+    }
+  },
+  "version": 0.4
+}

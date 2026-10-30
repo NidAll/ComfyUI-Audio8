@@ -1,0 +1,50 @@
+{
+  "format": "audio8-tiny-golden-v1",
+  "upstream": {
+    "repository": "Edge0/Audio8-TTS-Realistic-0.6b",
+    "revision": "1e857568bfd4f02931aca3988ee773a44d2d26d3",
+    "source": "modeling_arktts.py and configuration_arktts.py"
+  },
+  "generation": {
+    "device": "cpu",
+    "seed": 2026,
+    "weights": "synthetic random initialization; no pretrained checkpoint"
+  },
+  "config": {
+    "vocab_size": 128,
+    "dim": 64,
+    "n_layer": 2,
+    "n_head": 2,
+    "n_local_heads": 1,
+    "head_dim": 32,
+    "intermediate_size": 128,
+    "max_seq_len": 64,
+    "rope_base": 10000.0,
+    "norm_eps": 1e-06,
+    "dropout": 0.0,
+    "attention_qkv_bias": true,
+    "attention_qk_norm": false,
+    "attention_o_bias": false,
+    "codebook_size": 8,
+    "num_codebooks": 3,
+    "semantic_begin_id": 100,
+    "semantic_end_id": 107,
+    "n_fast_layer": 1,
+    "fast_dim": 64,
+    "fast_n_head": 2,
+    "fast_n_local_heads": 1,
+    "fast_head_dim": 32,
+    "fast_intermediate_size": 128,
+    "fast_attention_qkv_bias": false,
+    "fast_attention_qk_norm": false,
+    "fast_attention_o_bias": false,
+    "norm_fastlayer_input": true,
+    "initializer_range": 0.02,
+    "ras_window_size": 4,
+    "ras_temperature": 1.0,
+    "ras_top_p": 0.9,
+    "eos_token_id": 90,
+    "pad_token_id": 0
+  },
+  "tensor_file": "audio8_tiny_golden.safetensors"
+}

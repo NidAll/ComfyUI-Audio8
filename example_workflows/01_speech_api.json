@@ -1,0 +1,49 @@
+{
+  "1": {
+    "class_type": "Audio8Loader",
+    "inputs": {
+      "model_name": "audio8-realistic-int8-all.safetensors",
+      "precision": "auto",
+      "device": "auto",
+      "codec_device": "gpu"
+    }
+  },
+  "2": {
+    "class_type": "Audio8Synthesize",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "text": "Hello! It is wonderful to hear from you.",
+      "seed": 42,
+      "max_new_tokens": 512,
+      "temperature": 0.8,
+      "top_p": 0.95,
+      "top_k": 50,
+      "do_sample": true,
+      "acceleration": "auto",
+      "batch_lines": false
+    }
+  },
+  "3": {
+    "class_type": "SaveAudioAdvanced",
+    "inputs": {
+      "audio": [
+        "2",
+        0
+      ],
+      "filename_prefix": "audio/Audio8",
+      "format": "flac"
+    }
+  },
+  "6": {
+    "class_type": "PreviewAny",
+    "inputs": {
+      "source": [
+        "2",
+        1
+      ]
+    }
+  }
+}

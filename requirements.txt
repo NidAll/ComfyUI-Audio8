@@ -1,0 +1,2 @@
+# PyTorch, torchaudio, safetensors and tokenizers are supplied by ComfyUI.
+comfy-kitchen>=0.2.40

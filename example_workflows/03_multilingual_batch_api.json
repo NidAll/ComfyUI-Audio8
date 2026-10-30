@@ -1,0 +1,49 @@
+{
+  "1": {
+    "class_type": "Audio8Loader",
+    "inputs": {
+      "model_name": "audio8-realistic-int8-all.safetensors",
+      "precision": "auto",
+      "device": "auto",
+      "codec_device": "gpu"
+    }
+  },
+  "2": {
+    "class_type": "Audio8Synthesize",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "text": "Hello, it is wonderful to meet you.\nBonjour, je suis heureux de vous rencontrer.\nمرحباً، يسعدني لقاؤك.\n你好，很高兴见到你。",
+      "seed": 42,
+      "max_new_tokens": 512,
+      "temperature": 0.8,
+      "top_p": 0.95,
+      "top_k": 50,
+      "do_sample": true,
+      "acceleration": "auto",
+      "batch_lines": true
+    }
+  },
+  "3": {
+    "class_type": "SaveAudioAdvanced",
+    "inputs": {
+      "audio": [
+        "2",
+        0
+      ],
+      "filename_prefix": "audio/Audio8",
+      "format": "flac"
+    }
+  },
+  "6": {
+    "class_type": "PreviewAny",
+    "inputs": {
+      "source": [
+        "2",
+        1
+      ]
+    }
+  }
+}

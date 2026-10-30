@@ -1,0 +1,7 @@
+audio8_tts
+
+The model architecture is inspired by the DualAR design used in Fish Audio
+S2 Pro.
+
+Optional reference transcription uses the separately distributed OpenAI Whisper
+Base checkpoint (Apache-2.0); no upstream Whisper source code is vendored here.

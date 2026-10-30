@@ -1,0 +1,107 @@
+{
+  "1": {
+    "class_type": "Audio8Loader",
+    "inputs": {
+      "model_name": "audio8-realistic-int8-all.safetensors",
+      "precision": "auto",
+      "device": "auto",
+      "codec_device": "gpu"
+    }
+  },
+  "2": {
+    "class_type": "Audio8LongSpeech",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "text": "This is a longer voice cloning example. Each section uses the same reference recording, so the speaker stays anchored to the original voice. You can paste an article, a story, or several paragraphs here. The workflow transcribes the reference automatically and generates the new speech in complete sections. The sections are joined into one recording, with a short pause between them. This keeps the model within its context window while allowing the final audio to continue for much longer.",
+      "seed": 42,
+      "max_new_tokens": 768,
+      "temperature": 0.8,
+      "top_p": 0.95,
+      "top_k": 50,
+      "do_sample": false,
+      "acceleration": "auto",
+      "voice": [
+        "5",
+        0
+      ],
+      "chunk_chars": 240,
+      "pause_ms": 100
+    }
+  },
+  "3": {
+    "class_type": "SaveAudioAdvanced",
+    "inputs": {
+      "audio": [
+        "2",
+        0
+      ],
+      "filename_prefix": "audio/Audio8",
+      "format": "flac"
+    }
+  },
+  "4": {
+    "class_type": "LoadAudio",
+    "inputs": {
+      "audio": "reference.wav"
+    }
+  },
+  "5": {
+    "class_type": "Audio8Voice",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "audio": [
+        "4",
+        0
+      ],
+      "transcript": [
+        "8",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "PreviewAny",
+    "inputs": {
+      "source": [
+        "2",
+        1
+      ]
+    }
+  },
+  "7": {
+    "class_type": "Audio8ASRLoader",
+    "inputs": {
+      "model_name": "whisper-base.safetensors",
+      "device": "auto"
+    }
+  },
+  "8": {
+    "class_type": "Audio8Transcribe",
+    "inputs": {
+      "asr": [
+        "7",
+        0
+      ],
+      "audio": [
+        "4",
+        0
+      ],
+      "language": "auto"
+    }
+  },
+  "9": {
+    "class_type": "PreviewAny",
+    "inputs": {
+      "source": [
+        "8",
+        0
+      ]
+    }
+  }
+}

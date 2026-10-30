@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "comfyui-audio8"
+version = "0.2.0"
+description = "Offline Audio8 DualAR TTS, voice cloning and single-file INT8 ConvRot export"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = ["torch>=2.5", "torchaudio>=2.5", "safetensors>=0.4", "tokenizers>=0.21", "comfy-kitchen>=0.2.40"]
+
+[project.optional-dependencies]
+download = ["huggingface-hub>=0.34"]
+asr = ["transformers>=4.57,<6"]
+test = ["pytest>=8", "soundfile>=0.12"]
+
+[tool.setuptools.packages.find]
+include = ["audio8*"]
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+testpaths = ["tests"]
+pythonpath = [".", "../.."]
